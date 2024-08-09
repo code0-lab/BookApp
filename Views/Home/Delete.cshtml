@@ -1,0 +1,11 @@
+@model ProductBook
+
+<div>
+    <p>@Model.BookName Are you sure that book will be deleted?
+        <form action="" method="post">
+         <input type="hidden" asp-for="BookId">
+         <button type="submit" class="btn btn-danger">Yes</buttontype></button>
+         <a asp-controller="Home" asp-action="Admin" class="btn btn-success">No</a>
+         </form>
+    </p>
+</div>

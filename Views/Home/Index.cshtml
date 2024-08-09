@@ -1,0 +1,38 @@
+﻿@model ProductViewModel // Model olarak ProductViewModel tipinde bir liste belirtiliyor. Bu liste, View'a gönderilecek kitap verilerini tutacak.
+
+ <div class="card card-body my-3">
+    <form asp-action="Index" method="get">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10" >
+                    <select class="form-select" name="category" 
+                    asp-items="@(new SelectList(Repository.Categories,"CategoryId","Name",Model.SlectedCategory))">
+                        <option value="0">All</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-success">Filter</button>
+                </div>
+             </div>
+        </div>
+    </form>
+ </div>
+       <div class="row container">  @*Bir satır ve konteyner sınıfına sahip bir div oluşturuluyor, bu sayede kitaplar yatay olarak sıralanacak.*@ 
+    @foreach(var book in Model.Products) { // Modeldeki her bir kitap için bir döngü başlatılıyor.
+        @if(book.IsActive)
+        {
+            
+        }
+        <div class="col-md-3 mb-2" style="width: 18rem;"> @*Her kitap için bir sütun oluşturuluyor.*@ 
+            <div class="card"> @*Bir kart oluşturuluyor.*@ 
+                <img src="~/img/@book.Image" alt="" class="card-img-top img-fluid" style="height: 200px; object-fit: contain;">  @*Kitabın kapağı için bir resim elementi ekleniyor.*@ 
+                <div class="card-body"> @*Kartın gövdesi oluşturuluyor.*@ 
+                    <h5 class="card-title">@book.BookName</h5> @*Kitabın adı ekleniyor.*@ 
+                    <p class="card-text">PageCount: @book.PageCount</p> @*Kitap için PageCount ekleniyor.*@ 
+                    <a asp-controller="Home" asp-action="Details" asp-route-id="@book.BookId" class="btn btn-success">Detail</a> @*Kitabın detaylarına giden bir link oluşturuluyor.*@ 
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
